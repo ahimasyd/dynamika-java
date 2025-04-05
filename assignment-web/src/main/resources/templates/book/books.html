@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+
+<div th:replace="nagivation.html :: navigation"></div>
+
+<div style="display: flex; height: 80vh;">
+    <div class="common-form" style="flex: 1; margin-right: 25px;">
+        <h3>Добавление книги</h3>
+
+        <form th:action="@{/books}" th:object="${bookSaveRequest}" method="post">
+            <div>
+                <label for="book-create-form-isbn">ISBN:</label>
+                <input type="text" id="book-create-form-isbn" th:field="*{isbn}" required="required"/>
+            </div>
+
+            <div>
+                <label for="book-create-form-title">Заголовок:</label>
+                <input type="text" id="book-create-form-title" th:field="*{title}" required="required"/>
+            </div>
+
+            <div>
+                <label for="book-create-form-author">Автор:</label>
+                <input type="text" id="book-create-form-author" th:field="*{author}"/>
+            </div>
+
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+
+    <div style="flex: 4;">
+        <h1>Список книг</h1>
+
+        <div th:if="${#lists.isEmpty(books)}">
+            <p>Нет книг для отображения</p>
+        </div>
+
+        <div th:unless="${#lists.isEmpty(books)}">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ISBN</th>
+                    <th>Заголовок</th>
+                    <th>Автор</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.id}"></td>
+                    <td th:text="${book.isbn}"></td>
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td>
+                        <a th:href="@{/books/edit/{id}(id=${book.id})}">
+                            <button class="edit-button">Редактировать</button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="pagination" th:if="${totalPages > 1}">
+                <th:block th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}">
+                    <span th:if="${pageNumber == currentPage}" class="current" th:text="${pageNumber + 1}"></span>
+                    <a th:unless="${pageNumber == currentPage}" th:href="@{/books(page=${pageNumber}, size=${pageSize ?: 10})}"
+                       th:text="${pageNumber + 1}"></a>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

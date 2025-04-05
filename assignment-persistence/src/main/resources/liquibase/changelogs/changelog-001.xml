@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.31.xsd">
+
+    <changeSet author="Rodzaevsky.D" id="001-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="book"/>
+            </not>
+        </preConditions>
+        <createTable tableName="book">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book_pk"/>
+            </column>
+            <column name="isbn" type="text">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="title" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="text">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Rodzaevsky.D" id="001-2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="client"/>
+            </not>
+        </preConditions>
+        <createTable tableName="client">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="client_pk"/>
+            </column>
+            <column name="first_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="patronymic" type="text">
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Rodzaevsky.D" id="001-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="borrowing"/>
+            </not>
+        </preConditions>
+        <createTable tableName="borrowing">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="borrowing_pk"/>
+            </column>
+            <column name="book_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="timestamp">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Rodzaevsky.D" id="001-4">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="borrowing_fk_book"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint constraintName="borrowing_fk_book"
+                                 baseTableName="borrowing" baseColumnNames="book_id"
+                                 referencedTableName="book" referencedColumnNames="id"
+                                 deferrable="false" initiallyDeferred="false"
+                                 onUpdate="CASCADE" onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet author="Rodzaevsky.D" id="001-5">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="borrowing_fk_client"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint constraintName="borrowing_fk_client"
+                                 baseTableName="borrowing" baseColumnNames="client_id"
+                                 referencedTableName="client" referencedColumnNames="id"
+                                 deferrable="false" initiallyDeferred="false"
+                                 onUpdate="CASCADE" onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

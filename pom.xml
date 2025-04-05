@@ -1,0 +1,121 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example.dynamika.assignment</groupId>
+    <artifactId>assignment-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>${revision}${changelist}</version>
+
+    <modules>
+        <module>assignment-commons</module>
+        <module>assignment-dto</module>
+        <module>assignment-persistence</module>
+        <module>assignment-service</module>
+        <module>assignment-web</module>
+        <module>assignment-app</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <revision>1.0.0</revision>
+        <changelist>-SNAPSHOT</changelist>
+
+        <spring.boot.version>2.7.18</spring.boot.version>
+        <openapi.version>1.8.0</openapi.version>
+        <swagger.version>2.2.29</swagger.version>
+        <postgresql.version>42.7.5</postgresql.version>
+        <liquibase.version>4.31.1</liquibase.version>
+        <apache.commons.version>3.17.0</apache.commons.version>
+        <modelmapper.version>3.2.2</modelmapper.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Dynamika Assignment -->
+            <dependency>
+                <groupId>org.example.dynamika.assignment</groupId>
+                <artifactId>assignment-commons</artifactId>
+                <version>${revision}${changelist}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example.dynamika.assignment</groupId>
+                <artifactId>assignment-dto</artifactId>
+                <version>${revision}${changelist}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example.dynamika.assignment</groupId>
+                <artifactId>assignment-persistence</artifactId>
+                <version>${revision}${changelist}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example.dynamika.assignment</groupId>
+                <artifactId>assignment-service</artifactId>
+                <version>${revision}${changelist}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example.dynamika.assignment</groupId>
+                <artifactId>assignment-web</artifactId>
+                <version>${revision}${changelist}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.example.dynamika.assignment</groupId>
+                <artifactId>assignment-app</artifactId>
+                <version>${revision}${changelist}</version>
+            </dependency>
+
+            <!-- Spring Boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Docs -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${openapi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <!-- Database -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase.version}</version>
+            </dependency>
+
+            <!-- Apache -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache.commons.version}</version>
+            </dependency>
+
+            <!-- ModelMapper -->
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>

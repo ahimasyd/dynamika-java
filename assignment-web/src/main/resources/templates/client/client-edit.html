@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+
+<div th:replace="nagivation.html :: navigation"></div>
+
+<div class="common-form" style="flex: 1; margin-right: 25px;">
+    <h3>Редактирование клиента</h3>
+
+    <form th:action="@{/clients/edit/{id}(id=${saveRequest.id})}" th:object="${saveRequest}" method="post">
+        <div>
+            <label for="client-create-form-firstName">Фамилия:</label>
+            <input type="text" id="client-create-form-firstName" th:field="*{firstName}" required="required"/>
+        </div>
+
+        <div>
+            <label for="client-create-form-lastName">Имя:</label>
+            <input type="text" id="client-create-form-lastName" th:field="*{lastName}" required="required"/>
+        </div>
+
+        <div>
+            <label for="client-create-form-patronymic">Отчество:</label>
+            <input type="text" id="client-create-form-patronymic" th:field="*{patronymic}"/>
+        </div>
+
+        <div>
+            <label for="client-create-form-birthDate">Дата рождения:</label>
+            <input type="date" id="client-create-form-birthDate" th:field="*{birthDate}" required="required"/>
+        </div>
+
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+
+</body>
+</html>

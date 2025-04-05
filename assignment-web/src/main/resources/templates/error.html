@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Библиотека</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+
+<div th:replace="nagivation.html :: navigation"></div>
+<h1>Ошибка!</h1>
+
+<div>
+    <p th:text="${message} ?: 'Случилось непредвиденное...'">Случилось непредвиденное</p>
+</div>
+
+</body>
+</html>

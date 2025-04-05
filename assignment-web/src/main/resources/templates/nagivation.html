@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+
+<nav th:fragment="navigation" id="navigation">
+    <div>
+        <a href="/books?page=0&size=10">Книги</a>
+    </div>
+    <div>
+        <a href="/clients?page=0&size=10">Клиенты</a>
+    </div>
+    <div>
+        <a href="/borrowings">Выдать книгу</a>
+    </div>
+</nav>
+
+</body>
+</html>

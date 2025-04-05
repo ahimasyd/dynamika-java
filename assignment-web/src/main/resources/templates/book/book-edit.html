@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Библиотека</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+
+<div th:replace="nagivation.html :: navigation"></div>
+
+<div class="common-form" style="flex: 1; margin-right: 25px;">
+    <h3>Редактирование книги</h3>
+
+    <form th:action="@{/books/edit/{id}(id=${bookSaveRequest.id})}" th:object="${bookSaveRequest}" method="post">
+        <div>
+            <label for="book-edit-form-isbn">ISBN:</label>
+            <input type="text" id="book-edit-form-isbn" th:field="*{isbn}" required="required"/>
+        </div>
+
+        <div>
+            <label for="book-edit-form-title">Заголовок:</label>
+            <input type="text" id="book-edit-form-title" th:field="*{title}" required="required"/>
+        </div>
+
+        <div>
+            <label for="book-edit-form-author">Автор:</label>
+            <input type="text" id="book-edit-form-author" th:field="*{author}"/>
+        </div>
+
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+
+</body>
+</html>
