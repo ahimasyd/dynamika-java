@@ -14,12 +14,12 @@
 
     <form th:action="@{/borrowings}" th:object="${saveRequest}" method="post">
         <div>
-            <label for="borrow-form-bookId">ISBN:</label>
+            <label for="borrow-form-bookId">ID книги:</label>
             <input type="text" id="borrow-form-bookId" th:field="*{bookId}" required="required"/>
         </div>
 
         <div>
-            <label for="borrow-form-clientId">Заголовок:</label>
+            <label for="borrow-form-clientId">ID клиента:</label>
             <input type="text" id="borrow-form-clientId" th:field="*{clientId}" required="required"/>
         </div>
 
