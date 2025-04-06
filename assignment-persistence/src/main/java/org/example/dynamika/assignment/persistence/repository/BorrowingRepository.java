@@ -13,10 +13,18 @@ import java.util.Optional;
 @Repository
 public interface BorrowingRepository extends JpaRepository<Borrowing, Long>, JpaSpecificationExecutor<Borrowing> {
 
-    @Query("select b from Borrowing b where b.book.id = :bookId and b.client.id = :clientId and b.endDate is null")
-    Optional<Borrowing> findOngoingByBookIdAndClientId(@Param("bookId") Long bookId, @Param("clientId") Long clientId);
+    @Query("select b" +
+            " from Borrowing b" +
+            "   join fetch b.book" +
+            "   join fetch b.client" +
+            " where b.endDate is null")
+    List<Borrowing> findAllOngoingFetchAll();
 
-    @Query("select b from Borrowing b where b.endDate is null order by b.id")
-    List<Borrowing> findOngoingOrderById();
+    @Query("select b" +
+            " from Borrowing b" +
+            " where b.book.id = :bookId" +
+            "   and b.client.id = :clientId" +
+            "   and b.endDate is null")
+    Optional<Borrowing> findOngoingByBookIdAndClientId(@Param("bookId") Long bookId, @Param("clientId") Long clientId);
 
 }

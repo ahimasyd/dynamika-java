@@ -36,7 +36,7 @@ public class BorrowingServiceImpl implements BorrowingService {
     @Transactional(readOnly = true)
     @Override
     public Collection<BorrowingFlattenedDto> getAllOngoing() {
-        return borrowingRepository.findAll().stream()
+        return borrowingRepository.findAllOngoingFetchAll().stream()
                 .map(borrowingMapper::toFlattenedDto)
                 .collect(Collectors.toList());
     }
